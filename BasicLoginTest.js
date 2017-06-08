@@ -18,17 +18,14 @@ function handleFailure(err) {
 	closeBrowser();
 }
 
-function findTutsPlusLink() {
-	return browser.findElements(webdriver.By.css('[href="http://code.tutsplus.com/"]')).then(function(result) {
-		return result[0];
-	});
-}
-
 function closeBrowser() {
 	browser.quit();
 }
 
 browser.get('https://ping1.firebaseapp.com');
 browser.findElement(webdriver.By.xpath("//img[@src='https://platform.slack-edge.com/img/sign_in_with_slack.png']")).click();   //sendKeys('tuts+ code');
-browser.findElement(webdriver.By.name('btnG')).click();
-browser.wait(findTutsPlusLink, 2000).then(clickLink).then(logTitle).then(closeBrowser, handleFailure);
+browser.findElement(webdriver.By.xpath("//input[@id='domain']")).click();
+browser.findElement(webdriver.By.xpath("//input[@id='domain']")).sendKeys("pingpad");
+browser.findElement(webdriver.By.xpath("//button[@id='submit_team_domain']")).click();
+
+//browser.wait(findTutsPlusLink, 2000).then(clickLink).then(logTitle).then(closeBrowser, handleFailure);
